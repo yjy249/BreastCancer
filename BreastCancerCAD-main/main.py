@@ -36,8 +36,8 @@ if __name__ == '__main__':
            'You can choose to detect the lesions here and then enter your breast picture on the page.')
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--weights', nargs='+', type=str, default='weights/mass_best.pt', help='model path(s)')
-    parser.add_argument('--source', type=str, default='data/images', help='file/dir/URL/glob, 0 for webcam')
+    parser.add_argument('--weights', nargs='+', type=str, default='BreastCancerCAD-main/mass/weights/mass_best.pt', help='model path(s)')
+    parser.add_argument('--source', type=str, default='BreastCancerCAD-main/mass/data/images', help='file/dir/URL/glob, 0 for webcam')
     parser.add_argument('--imgsz', '--img', '--img-size', nargs='+', type=int, default=[640], help='inference size h,w')
     parser.add_argument('--conf-thres', type=float, default=0.25, help='confidence threshold')
     parser.add_argument('--iou-thres', type=float, default=0.45, help='NMS IoU threshold')
@@ -72,8 +72,8 @@ if __name__ == '__main__':
         with st.spinner(text='资源加载中...'):
             st.sidebar.image(uploaded_file)
             picture = Image.open(uploaded_file)
-            picture = picture.save(f'images/{uploaded_file.name}')
-            opt.source = f'images/{uploaded_file.name}'
+            picture = picture.save(f'BreastCancerCAD-main/images/{uploaded_file.name}')
+            opt.source = f'BreastCancerCAD-main/images/{uploaded_file.name}'
     else:
         is_valid = False
 
@@ -84,10 +84,10 @@ if __name__ == '__main__':
 
     if model_index == 0:
         st.sidebar.text('You selected: calc')
-        opt.weights = 'calc/weights/calc_best.pt'
+        opt.weights = 'BreastCancerCAD-main/calc/weights/calc_best.pt'
     else:
         st.sidebar.text('You selected: mass')
-        opt.weights = 'mass/weights/mass_best.pt'
+        opt.weights = 'BreastCancerCAD-main/mass/weights/mass_best.pt'
 
     if is_valid:
         if st.sidebar.button('开始检测'):
